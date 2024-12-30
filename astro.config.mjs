@@ -1,5 +1,21 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-// https://astro.build/config
-export default defineConfig({});
+import tailwind from "@astrojs/tailwind";
+
+import icon from "astro-icon";
+
+export default defineConfig({
+  site: "https://onend.studio",
+
+  experimental: {
+    svg: true,
+  },
+
+  integrations: [
+    tailwind(),
+    icon({
+      iconDir: "src/assets/icons",
+    }),
+  ],
+});

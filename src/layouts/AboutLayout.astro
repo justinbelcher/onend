@@ -1,0 +1,22 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import mePhoto from "../assets/me.webp";
+
+const { frontmatter } = Astro.props;
+const { description, pageTitle } = frontmatter;
+---
+
+<Layout {pageTitle}>
+  <div class="grid grid-cols-2">
+    <section class="mr-5">
+      <h2 class="text-3xl leading-snug -mt-2 mb-4 uppercase">{description}</h2>
+      <slot />
+    </section>
+    <Image
+      src={mePhoto}
+      class="rounded object-cover object-center max-h-[calc(100vh-190px)]"
+      alt="Headshot of Justin"
+    />
+  </div>
+</Layout>

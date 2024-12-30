@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import logomark from "../assets/logomark.svg";
+
+import { SOCIAL_LINKS } from "@config";
+
+const { instagram, email } = SOCIAL_LINKS;
+const username = instagram.split("/").pop();
+---
+
+<footer class="py-5 flex justify-between items-center">
+  <div class="flex flex-row gap-5">
+    <section>
+      <h3>contact</h3>
+      <address class="not-italic">
+        <a href=`mailto:${email}`>{email}</a>
+      </address>
+    </section>
+    <section>
+      <h3>instagram</h3>
+      <a href={instagram}
+        >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
+      >
+    </section>
+  </div>
+  <Image src={logomark} alt="On end studio brand mark" width={64} height={64} />
+</footer>
