@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import plugin from "tailwindcss/plugin";
+
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -23,5 +26,24 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".visually-hidden": {
+          border: "0",
+          clip: "rect(0 0 0 0)",
+          height: "1px",
+          margin: "-1px",
+          overflow: "hidden",
+          padding: "0",
+          position: "absolute",
+          width: "1px",
+          "white-space": "nowrap",
+        },
+        ".no-scrollbars": {
+          "scrollbar-width": "none",
+        },
+      });
+    }),
+  ],
 };

@@ -1,16 +1,20 @@
 ---
+import { getEntry, render } from "astro:content";
+
 import PageLayout from "@layouts/PageLayout.astro";
 import HeroImage from "@components/HeroImage.astro";
 
-import { Content as BioContent, frontmatter } from "@data/bio.md";
+const bio = await getEntry("text", "bio");
 
-const byline = frontmatter.byline;
+const { Content: Bio } = await render(bio);
+
+const { byline } = bio.data;
 ---
 
 <PageLayout pageTitle="About">
   <section slot="content">
     <h1 class="text-4xl my-5 leading-tight uppercase">{byline}</h1>
-    <BioContent />
+    <Bio />
   </section>
 
   <HeroImage

@@ -11,10 +11,10 @@
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
+      "@scripts/*": ["src/scripts/*"],
       "@data/*": ["src/data/*"],
-      "@config": ["src/config.ts"],
-      "@types": ["src/types.ts"],
-      "@utils": ["src/utils.ts"]
+      "@const": ["src/const.ts"],
+      "@types": ["src/types.ts"]
     }
   }
 }

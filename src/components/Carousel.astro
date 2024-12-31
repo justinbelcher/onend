@@ -1,5 +1,5 @@
 ---
-import { getImages } from "@utils";
+import { getImages } from "@scripts/utils";
 import { Image } from "astro:assets";
 
 const { photos } = Astro.props;
@@ -9,15 +9,44 @@ photos.forEach((path: string) => {
     throw new Error(`Image not found: ${path}`);
   }
 });
+const totalPhotos = photos.length;
 ---
 
-<ul>
-  {
-    photos.map((path: string) => (
-      <li>
-        <Image src={allImages[path]()} alt="Photo of piece" />
-      </li>
-    ))
+<div class="relative">
+  <ul
+    id="carousel"
+    class="cursor-pointer flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"
+    data-total={totalPhotos}
+  >
+    {
+      photos.map((path: string) => (
+        <div class="snap-center h-[calc(100vh-48px)] flex-shrink-0 w-full">
+          <Image
+            src={allImages[path]()}
+            alt="Photo of piece"
+            class="rounded object-cover object-center h-full user-select: none"
+          />
+        </div>
+      ))
+    }
+  </ul>
+  <div
+    class="absolute bottom-3 right-3 bg-stone-50/75 text-stone-600 px-2 rounded-lg flex items-center"
+  >
+    <span id="curr">01</span>
+    /
+    <span>{totalPhotos.toString().padStart(2, "0")}</span>
+  </div>
+</div>
+
+<script>
+  import { initCarousel } from "@scripts/carousel";
+
+  const ul = document.getElementById("carousel");
+  const curr = document.getElementById("curr");
+
+  if (ul && curr) {
+    const totalPhotos = Number(ul.getAttribute("data-total")!);
+    initCarousel(ul, curr, totalPhotos);
   }
-</ul>
-{photos}
+</script>
