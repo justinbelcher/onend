@@ -33,7 +33,7 @@ const totalPhotos = photos.length;
   <div
     class="absolute bottom-3 right-3 bg-stone-50/75 text-stone-600 px-2 rounded-lg flex items-center"
   >
-    <span id="curr">01</span>
+    <span id="curr-item">01</span>
     /
     <span>{totalPhotos.toString().padStart(2, "0")}</span>
   </div>
@@ -42,11 +42,10 @@ const totalPhotos = photos.length;
 <script>
   import { initCarousel } from "@scripts/carousel";
 
-  const ul = document.getElementById("carousel");
-  const curr = document.getElementById("curr");
+  const carouselEl = document.getElementById("carousel");
+  const labelEl = document.getElementById("curr-item");
 
-  if (ul && curr) {
-    const totalPhotos = Number(ul.getAttribute("data-total")!);
-    initCarousel(ul, curr, totalPhotos);
+  if (carouselEl && labelEl) {
+    initCarousel(carouselEl, labelEl);
   }
 </script>
