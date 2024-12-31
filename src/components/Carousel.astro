@@ -15,18 +15,18 @@ const totalPhotos = photos.length;
 <div class="relative">
   <ul
     id="carousel"
-    class="cursor-pointer flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"
+    class="flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"
     data-total={totalPhotos}
   >
     {
       photos.map((path: string) => (
-        <div class="snap-center h-[calc(100vh-48px)] flex-shrink-0 w-full">
+        <li class="snap-center h-[calc(100vh-48px)] flex-shrink-0 w-full">
           <Image
             src={allImages[path]()}
             alt="Photo of piece"
             class="rounded object-cover object-center h-full user-select: none"
           />
-        </div>
+        </li>
       ))
     }
   </ul>

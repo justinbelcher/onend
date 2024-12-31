@@ -9,17 +9,17 @@ const { year, materials, finish } = Astro.props;
 
 <section class="border-t border-stone-300">
   <article>
-    <h3>Year</h3>
+    <h2>Year</h2>
     <p>{year}</p>
   </article>
   <article>
-    <h3>Materials</h3>
+    <h2>Materials</h2>
     <p>{materials}</p>
   </article>
   {
     finish && (
       <article>
-        <h3>Finish</h3>
+        <h2>Finish</h2>
         <p>{finish}</p>
       </article>
     )
@@ -30,7 +30,7 @@ const { year, materials, finish } = Astro.props;
   article {
     @apply grid h-8 grid-cols-6 items-center gap-6 border-b border-stone-300;
   }
-  h3 {
+  h2 {
     @apply col-span-2 text-stone-600;
   }
   p {
