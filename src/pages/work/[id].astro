@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 
 import ProjectInfo from "@components/ProjectInfo.astro";
+import Carousel from "@components/Carousel.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("projects");
@@ -27,4 +28,5 @@ const { name, photos, year, materials, finish } = project.data;
       <ProjectInfo {year} {materials} {finish} />
     </div>
   </section>
+  <Carousel {photos} slot="hero" />
 </PageLayout>

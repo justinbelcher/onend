@@ -1,0 +1,23 @@
+---
+import { getImages } from "@utils";
+import { Image } from "astro:assets";
+
+const { photos } = Astro.props;
+const allImages = getImages();
+photos.forEach((path: string) => {
+  if (!(path in allImages)) {
+    throw new Error(`Image not found: ${path}`);
+  }
+});
+---
+
+<ul>
+  {
+    photos.map((path: string) => (
+      <li>
+        <Image src={allImages[path]()} alt="Photo of piece" />
+      </li>
+    ))
+  }
+</ul>
+{photos}
