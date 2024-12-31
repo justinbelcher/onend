@@ -12,6 +12,10 @@ a {
   }
 }
 
+p {
+  margin-bottom: 1.5rem;
+}
+
 /* Utility classes */
 .visually-hidden {
   border: 0;

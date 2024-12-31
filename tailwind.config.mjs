@@ -18,6 +18,9 @@ export default {
       fontFamily: {
         sans: ['"GT Pressura Mono"', '"Courier New"', "monospace"],
       },
+      gridTemplateColumns: {
+        14: "repeat(14, minmax(0, 1fr))",
+      },
     },
   },
   plugins: [],

@@ -1,9 +1,5 @@
 ---
-headline: About Justin
-description: I am a designer and furniture maker based out of San Francisco, CA. This site is a collection of my work.
-
-pageTitle: About Justin
-layout: ../layouts/AboutLayout.astro
+byline: I am a designer and furniture maker based out of San Francisco, CA. This site is a collection of my work.
 ---
 
 I grew up as a farm kid in West Virginia, helping my family build fences, buildings, and houses. I got my start in woodworking in 2012, when I was on the hunt for a mid-century credenza for our first home in Durham, NC. At the time I didn't understand why a rectangle of wood costs $3,000, but a friend and a skilled artist named [Elijah Leed](https://www.elijahleed.com/) was willing to show me the ropes so I could build it myself. I've been obsessed ever since.

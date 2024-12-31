@@ -1,3 +1,5 @@
+import type { NavLink } from "@types";
+
 export const THEME_COLOR = "#f3f1ef";
 export const SITE_TITLE = "On end studio";
 export const SITE_DESCRIPTION = {
@@ -11,3 +13,18 @@ export const SOCIAL_LINKS = {
   email: "hi@onendstudio.com",
   instagram: "https://instagram.com/onendstudio",
 };
+export const NAV_LINKS: NavLink[] = [
+  {
+    label: "work",
+    href: "/work",
+  },
+  {
+    label: "about",
+    href: "/about",
+  },
+
+  {
+    label: "contact",
+    href: `mailto:${SOCIAL_LINKS.email}`,
+  },
+];

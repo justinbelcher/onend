@@ -4,12 +4,16 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
+    "strictNullChecks": true,
+    "allowJs": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
-      "@config": ["src/config.ts"]
+      "@data/*": ["src/data/*"],
+      "@config": ["src/config.ts"],
+      "@types": ["src/types.ts"]
     }
   }
 }

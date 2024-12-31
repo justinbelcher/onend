@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  imagePath: string;
+  altText: string;
+  class?: string;
+}
+
+const { imagePath, altText, class: className } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>([
+  "/src/assets/*.{jpeg,jpg,png,gif,webp}",
+  "/src/assets/**/*.{jpeg,jpg,png,gif,webp}",
+]);
+if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist"`);
+---
+
+<section class={className}>
+  <Image
+    class="rounded object-cover object-center h-[calc(100vh-48px)]"
+    src={images[imagePath]()}
+    alt={altText}
+    loading="eager"
+  />
+</section>

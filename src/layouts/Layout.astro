@@ -2,9 +2,6 @@
 import "@styles/global.css";
 import "@styles/fonts.css";
 
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-
 import {
   THEME_COLOR,
   SITE_DESCRIPTION,
@@ -33,9 +30,9 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="text-stone-900 bg-stone-100 px-5">
-    <Header />
-    <main><slot /></main>
-    <Footer />
+  <body class="text-stone-900 bg-stone-200 p-6">
+    <main class="grid grid-cols-14 gap-6">
+      <slot />
+    </main>
   </body>
 </html>

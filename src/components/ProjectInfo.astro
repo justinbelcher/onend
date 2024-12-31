@@ -1,0 +1,39 @@
+---
+interface Props {
+  year: number;
+  materials: string;
+  finish?: string;
+}
+const { year, materials, finish } = Astro.props;
+---
+
+<section class="border-t border-stone-300">
+  <article>
+    <h3>Year</h3>
+    <p>{year}</p>
+  </article>
+  <article>
+    <h3>Materials</h3>
+    <p>{materials}</p>
+  </article>
+  {
+    finish && (
+      <article>
+        <h3>Finish</h3>
+        <p>{finish}</p>
+      </article>
+    )
+  }
+</section>
+
+<style>
+  article {
+    @apply grid h-8 grid-cols-6 items-center gap-6 border-b border-stone-300;
+  }
+  h3 {
+    @apply col-span-2 text-stone-600;
+  }
+  p {
+    @apply col-span-4 mb-0;
+  }
+</style>

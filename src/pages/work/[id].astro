@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+
+import ProjectInfo from "@components/ProjectInfo.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("projects");
+  return posts.map((project) => {
+    return {
+      params: { id: project.id },
+      props: { project },
+    };
+  });
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { name, photos, year, materials, finish } = project.data;
+---
+
+<PageLayout pageTitle={name}>
+  <section slot="content" class="flex flex-col justify-between h-full">
+    <h1 class="text-4xl my-5 leading-tight uppercase">{name}</h1>
+    <div>
+      <Content />
+      <ProjectInfo {year} {materials} {finish} />
+    </div>
+  </section>
+</PageLayout>
