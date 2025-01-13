@@ -19,13 +19,13 @@ const { fullWidth = false, showMark = false } = Astro.props;
   class={twMerge("grid gap-6 py-5", fullWidth ? "grid-cols-13" : "grid-cols-6")}
 >
   <section class="col-span-2">
-    <h3>contact</h3>
+    <h2>contact</h2>
     <address class="not-italic">
       <a href=`mailto:${email}`>{email}</a>
     </address>
   </section>
   <section class="col-span-2">
-    <h3>instagram</h3>
+    <h2>instagram</h2>
     <a href={instagram}
       >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
     >
