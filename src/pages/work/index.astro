@@ -1,19 +1,24 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import Layout from "@layouts/GridLayout.astro";
 
-const projects = await getCollection("projects");
+import { getOrderedProjects } from "@scripts/utils";
+
+const projects = await getOrderedProjects();
 ---
 
 <Layout>
-  <p>Work!</p>
-  <ul>
+  <section class="grid grid-cols-12 gap-6 my-8">
     {
       projects.map((project: any) => (
-        <li>
-          <a href={`work/${project.id}`}>{project.data.name}</a>
-        </li>
+        <ProjectCard
+          slug={project.id}
+          name={project.data.name}
+          year={project.data.year}
+          image={project.data.cover}
+          class="col-span-3"
+        />
       ))
     }
-  </ul></Layout
->
+  </section>
+</Layout>

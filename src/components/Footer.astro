@@ -1,14 +1,23 @@
 ---
 import { Image } from "astro:assets";
 import logomark from "../assets/logomark.svg";
+import { twMerge } from "tailwind-merge";
 
-import { SOCIAL_LINKS } from "src/const";
+interface Props {
+  fullWidth?: boolean;
+  showMark?: boolean;
+}
+import { SOCIAL_LINKS } from "src/constants";
 
 const { instagram, email } = SOCIAL_LINKS;
 const username = instagram.split("/").pop();
+
+const { fullWidth = false, showMark = false } = Astro.props;
 ---
 
-<footer class="grid grid-cols-6 gap-6 py-5">
+<footer
+  class={twMerge("grid gap-6 py-5", fullWidth ? "grid-cols-13" : "grid-cols-6")}
+>
   <section class="col-span-2">
     <h3>contact</h3>
     <address class="not-italic">
@@ -21,4 +30,13 @@ const username = instagram.split("/").pop();
       >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
     >
   </section>
+  {
+    showMark && (
+      <>
+        <div class="flex justify-end col-span-9">
+          <Image src={logomark} alt="" width={48} height={48} />
+        </div>
+      </>
+    )
+  }
 </footer>

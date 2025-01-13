@@ -30,13 +30,14 @@ const totalPhotos = photos.length;
       ))
     }
   </ul>
-  <div
-    class="absolute bottom-3 right-3 bg-stone-50/75 text-stone-600 px-2 rounded-lg flex items-center"
-  >
-    <span id="curr-item">01</span>
-    /
-    <span>{totalPhotos.toString().padStart(2, "0")}</span>
-  </div>
+  {
+    totalPhotos > 1 && (
+      <div class="absolute bottom-3 right-3 bg-stone-50/75 text-stone-600 px-2 rounded-lg flex items-center">
+        <span id="curr-item">01</span>/
+        <span>{totalPhotos.toString().padStart(2, "0")}</span>
+      </div>
+    )
+  }
 </div>
 
 <script>
@@ -46,6 +47,9 @@ const totalPhotos = photos.length;
   const labelEl = document.getElementById("curr-item");
 
   if (carouselEl && labelEl) {
-    initCarousel(carouselEl, labelEl);
+    const totalPhotos = Number(carouselEl.getAttribute("data-total"));
+    if (totalPhotos > 1) {
+      initCarousel(carouselEl, labelEl);
+    }
   }
 </script>

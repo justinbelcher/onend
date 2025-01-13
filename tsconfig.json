@@ -13,7 +13,7 @@
       "@styles/*": ["src/styles/*"],
       "@scripts/*": ["src/scripts/*"],
       "@data/*": ["src/data/*"],
-      "@const": ["src/const.ts"],
+      "@constants": ["src/constants.ts"],
       "@types": ["src/types.ts"]
     }
   }

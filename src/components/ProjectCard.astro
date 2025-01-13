@@ -1,0 +1,38 @@
+---
+import { getImages } from "@scripts/utils";
+import { Image } from "astro:assets";
+
+interface Props {
+  slug: string;
+  name: string;
+  year: number;
+  image: string;
+  class?: string;
+}
+
+const { slug, name, year, image, class: className } = Astro.props;
+
+const allImages = getImages();
+if (!(image in allImages)) {
+  throw new Error(`Cover image not found: ${image}`);
+}
+---
+
+<article class={`${className} group`}>
+  <a
+    href={`work/${slug}`}
+    title={`View details for ${name}`}
+    class="no-underline"
+    ><div class="relative w-full overflow-hidden rounded">
+      <Image
+        src={allImages[image]()}
+        alt={`Photo of ${name}`}
+        class="object-cover object-center w-full transition-transform duration-175 group-hover:scale-110"
+      />
+    </div>
+    <aside class="flex flex-cols justify-between">
+      <h1 class="uppercase group-hover:underline">{name}</h1>
+      <p class="text-stone-600 mb-0">{year}</p>
+    </aside>
+  </a>
+</article>

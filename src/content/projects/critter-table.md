@@ -4,6 +4,7 @@ name: Critter Table
 year: 2022
 materials: Red oak & hard maple
 finish: Hard wax oil & milk paint
+cover: /src/assets/work/critter-1.jpg
 photos:
   - /src/assets/work/critter-1.jpg
   - /src/assets/work/critter-2.jpg

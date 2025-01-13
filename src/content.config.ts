@@ -17,6 +17,7 @@ const projects = defineCollection({
     materials: z.string(),
     finish: z.string().optional(),
     client: z.string().optional(),
+    cover: z.string(),
     photos: z.array(z.string()),
   }),
 });

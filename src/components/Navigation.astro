@@ -1,8 +1,14 @@
 ---
+import { twMerge } from "tailwind-merge";
 import { Icon } from "astro-icon/components";
 
-import { SOCIAL_LINKS, NAV_LINKS } from "src/const";
+import { SOCIAL_LINKS, NAV_LINKS } from "src/constants";
 import type { NavLink } from "@types";
+
+interface Props {
+  class?: string;
+  fullWidth?: boolean;
+}
 
 const { instagram } = SOCIAL_LINKS;
 
@@ -10,26 +16,35 @@ const linkBaseClasses =
   "relative text-xl no-underline w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-black after:w-full";
 const linkActiveClasses = linkBaseClasses;
 const linkInactiveClasses = `${linkBaseClasses} after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-175 after:origin-center`;
+
+const { fullWidth = false } = Astro.props;
 ---
 
-<section class="col-span-6">
-  <nav class="grid grid-cols-6 gap-6 items-start text-2xl uppercase">
-    {
-      NAV_LINKS.map((link: NavLink) => (
-        <a
-          href={link.href}
-          class={
-            Astro.url.pathname.startsWith(link.href)
-              ? linkActiveClasses
-              : linkInactiveClasses
-          }
-        >
-          {link.label}
-        </a>
-      ))
-    }
-    <a href={instagram} class="col-span-3 flex justify-end"
-      ><Icon name="instagram" size="24" title="instagrm" /></a
-    >
-  </nav>
-</section>
+<nav
+  class={twMerge(
+    "grid gap-6 items-start text-2xl uppercase",
+    fullWidth ? "grid-cols-13" : "grid-cols-6"
+  )}
+>
+  {
+    NAV_LINKS.map((link: NavLink) => (
+      <a
+        href={link.href}
+        class={
+          Astro.url.pathname.startsWith(link.href)
+            ? linkActiveClasses
+            : linkInactiveClasses
+        }
+      >
+        {link.label}
+      </a>
+    ))
+  }
+  <a
+    href={instagram}
+    class={twMerge(
+      "flex justify-end",
+      fullWidth ? "col-span-10" : "col-span-3"
+    )}><Icon name="instagram" size="24" title="Instagram" /></a
+  >
+</nav>
