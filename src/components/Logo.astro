@@ -1,16 +1,25 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/logo-vertical.svg";
+import logoVertical from "../assets/logo-vertical.svg";
+import logoHorizontal from "../assets/logo.svg";
 ---
 
-<header class="col-span-1">
-  <a href="/"
-    ><Image
-      src={logo}
-      width={56}
-      height={274}
-      loading="eager"
-      alt="On end studio logo"
-    /></a
+<header class="mobile:col-span-full desktop:col-span-1">
+  <a href="/">
+    <picture>
+      <source
+        media="(min-width: 768px)"
+        srcset={logoVertical.src}
+        width="56"
+        height="274"
+      />
+      <Image
+        src={logoHorizontal}
+        width={274}
+        height={56}
+        loading="eager"
+        alt="On end studio logo"
+      />
+    </picture></a
   >
 </header>

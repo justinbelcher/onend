@@ -31,7 +31,7 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     <title>{title}</title>
   </head>
   <body class="text-stone-900 bg-stone-200 p-6">
-    <main class="grid grid-cols-14 gap-6">
+    <main class="grid mobile:grid-cols-5 grid-cols-14 gap-6">
       <slot />
     </main>
   </body>

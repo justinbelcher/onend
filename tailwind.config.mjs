@@ -6,6 +6,10 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      screens: {
+        mobile: { max: "767px" },
+        desktop: { min: "768px" },
+      },
       fontSize: {
         sm: "0.8rem" /* 12px */,
         base: "1rem" /* 16px */,
