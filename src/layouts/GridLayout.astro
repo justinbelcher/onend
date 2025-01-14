@@ -1,9 +1,11 @@
 ---
+import { twMerge } from "tailwind-merge";
 interface Props {
   pageTitle?: string;
+  class?: string;
 }
 
-const { pageTitle } = Astro.props;
+const { pageTitle, class: className } = Astro.props;
 
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
@@ -12,11 +14,15 @@ import Footer from "@components/Footer.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout {pageTitle}>
-  <Logo />
-  <section class="flex flex-col col-span-13">
-    <Navigation fullWidth={true} />
-    <slot />
-    <Footer fullWidth={true} showMark={true} />
-  </section>
+<Layout
+  {pageTitle}
+  class={twMerge(
+    "grid-areas-desktop-work mobile:grid-areas-mobile-work",
+    className
+  )}
+>
+  <Logo class="grid-in-logo" />
+  <Navigation class="grid-in-nav" />
+  <slot />
+  <Footer class="grid-in-footer" />
 </Layout>

@@ -1,42 +1,43 @@
 ---
+import { twMerge } from "tailwind-merge";
 import { Image } from "astro:assets";
 import logomark from "../assets/logomark.svg";
-import { twMerge } from "tailwind-merge";
 
 interface Props {
-  fullWidth?: boolean;
-  showMark?: boolean;
+  hideMark?: boolean;
+  class?: string;
 }
 import { SOCIAL_LINKS } from "src/constants";
 
 const { instagram, email } = SOCIAL_LINKS;
 const username = instagram.split("/").pop();
 
-const { fullWidth = false, showMark = false } = Astro.props;
+const { hideMark = false, class: className } = Astro.props;
 ---
 
 <footer
-  class={twMerge("grid gap-6 py-5", fullWidth ? "grid-cols-13" : "grid-cols-6")}
+  class={twMerge(
+    "grid desktop:grid-cols-subgrid mobile:grid-areas-mobile-footer mobile:gap-4 pb-8",
+    className
+  )}
 >
-  <section class="col-span-2">
+  <section class="desktop:col-span-2 mobile:grid-in-contact">
     <h2>contact</h2>
     <address class="not-italic">
       <a href=`mailto:${email}`>{email}</a>
     </address>
   </section>
-  <section class="col-span-2">
+  <section class="desktop:col-span-2 mobile:grid-in-ig">
     <h2>instagram</h2>
     <a href={instagram}
       >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
     >
   </section>
   {
-    showMark && (
-      <>
-        <div class="flex justify-end col-span-9">
-          <Image src={logomark} alt="" width={48} height={48} />
-        </div>
-      </>
+    !hideMark && (
+      <div class="flex justify-end desktop:col-start-[-1] mobile:grid-in-logo ">
+        <Image src={logomark} alt="" width={48} height={48} />
+      </div>
     )
   }
 </footer>

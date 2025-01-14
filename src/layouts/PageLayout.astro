@@ -12,16 +12,10 @@ import Footer from "@components/Footer.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout {pageTitle}>
-  <Logo />
-
-  <section class="flex flex-col col-span-6 h-[calc(100vh-48px)]">
-    <Navigation />
-    <slot name="content" />
-    <Footer />
-  </section>
-
-  <!-- <section class="col-span-7">
-    <slot name="hero" />
-  </section> -->
+<Layout {pageTitle} class="grid-areas-desktop mobile:grid-areas-mobile">
+  <Logo class="grid-in-logo" />
+  <Navigation class="grid-in-nav" />
+  <slot name="content" />
+  <slot name="hero" />
+  <Footer class="grid-in-footer" hideMark={true} />
 </Layout>

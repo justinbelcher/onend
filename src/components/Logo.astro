@@ -2,24 +2,31 @@
 import { Image } from "astro:assets";
 import logoVertical from "../assets/logo-vertical.svg";
 import logoHorizontal from "../assets/logo.svg";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
-<header class="mobile:col-span-full desktop:col-span-1">
+<header class={className}>
   <a href="/">
-    <picture>
-      <source
-        media="(min-width: 768px)"
-        srcset={logoVertical.src}
-        width="56"
-        height="274"
-      />
-      <Image
-        src={logoHorizontal}
-        width={274}
-        height={56}
-        loading="eager"
-        alt="On end studio logo"
-      />
-    </picture></a
-  >
+    <Image
+      src={logoVertical}
+      width={56}
+      height={274}
+      loading="eager"
+      alt="On end studio logo"
+      class="mobile:hidden"
+    />
+    <Image
+      src={logoHorizontal}
+      width={274}
+      height={56}
+      loading="eager"
+      alt="On end studio logo"
+      class="desktop:hidden w-full"
+    />
+  </a>
 </header>

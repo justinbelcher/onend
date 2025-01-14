@@ -4,8 +4,10 @@ import HeroImage from "@components/HeroImage.astro";
 ---
 
 <PageLayout>
-  <section slot="content" class="flex-1 content-end">
-    <h1 class="text-[3.9vw] leading-[1.1] font-light uppercase">
+  <section slot="content" class="grid-in-main flex-1 content-end">
+    <h1
+      class="text-[3.9vw] mobile:text-[9vw] leading-[1.1] font-light uppercase"
+    >
       Some really nice things for your home&thinsp;&#8213;&thinsp;made upright
       with care by Justin Belcher in San Francisco.
     </h1>
@@ -15,5 +17,12 @@ import HeroImage from "@components/HeroImage.astro";
     slot="hero"
     imagePath="/src/assets/work/coffeetable-intro.jpg"
     altText="Front view of a walnut coffee table"
+    class="mobile:hidden grid-in-hero"
+  />
+  <HeroImage
+    slot="hero"
+    imagePath="/src/assets/work/coffeetable-1.jpg"
+    altText="Front view of a walnut coffee table"
+    class="desktop:hidden grid-in-hero"
   />
 </PageLayout>

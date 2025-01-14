@@ -12,8 +12,8 @@ const { byline } = bio.data;
 ---
 
 <PageLayout pageTitle="About">
-  <section slot="content">
-    <h1 class="text-4xl my-5 leading-tight uppercase">{byline}</h1>
+  <section slot="content" class="grid-in-main">
+    <h1 class="text-4xl mb-5 leading-tight uppercase">{byline}</h1>
     <Bio />
   </section>
 
@@ -21,5 +21,6 @@ const { byline } = bio.data;
     slot="hero"
     imagePath="/src/assets/me.webp"
     altText="Headshot of Justin"
+    class="grid-in-hero"
   />
 </PageLayout>

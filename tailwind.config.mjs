@@ -20,28 +20,49 @@ export default {
         "5xl": "3.052rem" /* 49px */,
       },
       borderRadius: {
-        DEFAULT: "1vw",
+        DEFAULT: "1.5vh",
       },
       fontFamily: {
         sans: ['"GT Pressura Mono"', '"Courier New"', "monospace"],
       },
       gridTemplateColumns: {
-        13: "repeat(13, minmax(0, 1fr))",
+        5: "repeat(5, minmax(0, 1fr))",
         14: "repeat(14, minmax(0, 1fr))",
       },
-      gridColumn: {
-        "span-7": "span 7 / span 7",
-        "span-8": "span 8 / span 8",
-        "span-9": "span 9 / span 9",
-        "span-10": "span 10 / span 10",
-        "span-11": "span 11 / span 11",
-        "span-12": "span 12 / span 12",
-        "span-13": "span 13 / span 13",
-        "span-14": "span 14 / span 14",
+      gridTemplateRows: {
+        desktop: "2rem 1fr 3rem",
+        mobile: "repeat(5, auto)",
+      },
+      gridTemplateAreas: {
+        desktop: [
+          "logo nav nav nav nav nav nav hero hero hero hero hero hero hero",
+          "logo main main main main main main hero hero hero hero hero hero hero",
+          "logo footer footer footer footer footer footer hero hero hero hero hero hero hero",
+        ],
+        "desktop-work": [
+          "logo nav nav nav nav nav nav nav nav nav nav nav nav nav",
+          "logo main main main main main main main main main main main main main",
+          "logo footer footer footer footer footer footer footer footer footer footer footer footer footer",
+        ],
+        mobile: [
+          "logo logo logo logo logo",
+          "nav nav nav nav nav",
+          "hero hero hero hero hero",
+          "main main main main main",
+          "footer footer footer footer footer",
+        ],
+        "mobile-work": [
+          "logo logo logo logo logo",
+          "nav nav nav nav nav",
+          "main main main main main",
+          "footer footer footer footer footer",
+        ],
+        "mobile-footer": ["contact logo", "ig logo"],
       },
     },
   },
   plugins: [
+    require("@savvywombat/tailwindcss-grid-areas"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".visually-hidden": {
@@ -61,4 +82,7 @@ export default {
       });
     }),
   ],
+  variants: {
+    gridTemplateAreas: ["responsive"],
+  },
 };

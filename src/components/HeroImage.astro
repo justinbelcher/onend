@@ -16,7 +16,7 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist"`);
 
 <section class={className}>
   <Image
-    class="rounded object-cover object-center h-[calc(100vh-48px)]"
+    class="rounded object-cover object-center desktop:h-[calc(100vh-48px)]"
     src={images[imagePath]()}
     alt={altText}
     loading="eager"

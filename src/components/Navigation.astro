@@ -17,15 +17,10 @@ const linkBaseClasses =
 const linkActiveClasses = linkBaseClasses;
 const linkInactiveClasses = `${linkBaseClasses} after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-175 after:origin-center`;
 
-const { fullWidth = false } = Astro.props;
+const { fullWidth = false, class: className } = Astro.props;
 ---
 
-<nav
-  class={twMerge(
-    "grid gap-6 items-start text-2xl uppercase  ",
-    fullWidth ? "grid-cols-13" : "grid-cols-6"
-  )}
->
+<nav class={twMerge("text-2xl uppercase grid grid-cols-subgrid", className)}>
   {
     NAV_LINKS.map((link: NavLink) => (
       <a
@@ -40,11 +35,7 @@ const { fullWidth = false } = Astro.props;
       </a>
     ))
   }
-  <a
-    href={instagram}
-    class={twMerge(
-      "flex justify-end",
-      fullWidth ? "col-span-10" : "col-span-3"
-    )}><Icon name="instagram" size="24" title="Instagram" /></a
+  <a href={instagram} class="col-start-[-1] flex justify-end" ,
+    ><Icon name="instagram" size="24" title="Instagram" /></a
   >
 </nav>
