@@ -24,5 +24,9 @@ import Layout from "@layouts/Layout.astro";
   <Logo class="grid-in-logo" />
   <Navigation class="grid-in-nav" />
   <slot />
-  <Footer class="grid-in-footer" />
+  <Footer
+    class="grid-in-footer"
+    hideMarkOnDesktop={false}
+    hideMarkOnMobile={false}
+  />
 </Layout>

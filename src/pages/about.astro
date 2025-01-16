@@ -6,6 +6,10 @@ import HeroImage from "@components/HeroImage.astro";
 
 const bio = await getEntry("text", "bio");
 
+if (!bio) {
+  throw new Error("Bio text snippet not found");
+}
+
 const { Content: Bio } = await render(bio);
 
 const { byline } = bio.data;

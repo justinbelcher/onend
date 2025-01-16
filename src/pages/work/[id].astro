@@ -21,12 +21,29 @@ const { name, photos, year, materials, finish } = project.data;
 ---
 
 <PageLayout pageTitle={name}>
-  <section slot="content" class="flex flex-col justify-between h-full mb-6">
+  <section
+    slot="content"
+    class="grid-in-main flex flex-col justify-between mb-6"
+  >
     <h1 class="text-4xl my-5 leading-tight uppercase">{name}</h1>
     <div>
       <Content />
       <ProjectInfo {year} {materials} {finish} />
     </div>
   </section>
-  <Carousel {photos} slot="hero" />
+  <Carousel {photos} slot="hero" class="grid-in-hero" />
 </PageLayout>
+
+<!-- <PageLayout pageTitle="About">
+  <section slot="content" class="grid-in-main">
+    <h1 class="text-4xl mb-5 leading-tight uppercase">{byline}</h1>
+    <Bio />
+  </section>
+
+  <HeroImage
+    slot="hero"
+    imagePath="/src/assets/me.webp"
+    altText="Headshot of Justin"
+    class="grid-in-hero"
+  />
+</PageLayout> -->

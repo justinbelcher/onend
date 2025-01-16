@@ -4,7 +4,8 @@ import { Image } from "astro:assets";
 import logomark from "../assets/logomark.svg";
 
 interface Props {
-  hideMark?: boolean;
+  hideMarkOnDesktop?: boolean;
+  hideMarkOnMobile?: boolean;
   class?: string;
 }
 import { SOCIAL_LINKS } from "src/constants";
@@ -12,7 +13,11 @@ import { SOCIAL_LINKS } from "src/constants";
 const { instagram, email } = SOCIAL_LINKS;
 const username = instagram.split("/").pop();
 
-const { hideMark = false, class: className } = Astro.props;
+const {
+  hideMarkOnDesktop = false,
+  hideMarkOnMobile = false,
+  class: className,
+} = Astro.props;
 ---
 
 <footer
@@ -33,11 +38,13 @@ const { hideMark = false, class: className } = Astro.props;
       >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
     >
   </section>
-  {
-    !hideMark && (
-      <div class="flex justify-end desktop:col-start-[-1] mobile:grid-in-logo ">
-        <Image src={logomark} alt="" width={48} height={48} />
-      </div>
-    )
-  }
+  <div
+    class={twMerge(
+      "flex justify-end desktop:col-start-[-1] mobile:grid-in-logo",
+      hideMarkOnDesktop && "desktop:hidden",
+      hideMarkOnMobile && "mobile:hidden"
+    )}
+  >
+    <Image src={logomark} alt="" width={48} height={48} />
+  </div>
 </footer>

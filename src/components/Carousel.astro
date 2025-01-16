@@ -1,8 +1,15 @@
 ---
-import { getImages } from "@scripts/utils";
+import { twMerge } from "tailwind-merge";
 import { Image } from "astro:assets";
 
-const { photos } = Astro.props;
+import { getImages } from "@scripts/utils";
+
+interface Props {
+  photos: string[];
+  class?: string;
+}
+
+const { photos, class: className } = Astro.props;
 const allImages = getImages();
 photos.forEach((path: string) => {
   if (!(path in allImages)) {
@@ -12,7 +19,7 @@ photos.forEach((path: string) => {
 const totalPhotos = photos.length;
 ---
 
-<div class="relative">
+<div class={twMerge("relative", className)}>
   <ul
     id="carousel"
     class="flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"
@@ -20,7 +27,7 @@ const totalPhotos = photos.length;
   >
     {
       photos.map((path: string) => (
-        <li class="snap-center h-[calc(100vh-48px)] flex-shrink-0 w-full">
+        <li class="snap-center desktop:h-[calc(100vh-48px)] flex-shrink-0 w-full">
           <Image
             src={allImages[path]()}
             alt="Photo of piece"

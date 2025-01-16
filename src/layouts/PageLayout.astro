@@ -17,5 +17,9 @@ import Layout from "@layouts/Layout.astro";
   <Navigation class="grid-in-nav" />
   <slot name="content" />
   <slot name="hero" />
-  <Footer class="grid-in-footer" hideMark={true} />
+  <Footer
+    class="grid-in-footer"
+    hideMarkOnDesktop={true}
+    hideMarkOnMobile={false}
+  />
 </Layout>
