@@ -11,9 +11,9 @@ export default {
         desktop: { min: "768px" },
       },
       fontSize: {
-        sm: "0.8rem" /* 12px */,
+        sm: "0.5rem" /* 12px */,
         base: "1rem" /* 16px */,
-        xl: "1.25rem" /* 20px */,
+        xl: "1.2rem" /* 20px */,
         "2xl": "1.563rem" /* 25px */,
         "3xl": "1.953rem" /* 31px */,
         "4xl": "2.441rem" /* 39px */,
@@ -23,7 +23,7 @@ export default {
         DEFAULT: "1.5vh",
       },
       fontFamily: {
-        sans: ['"GT Pressura Mono"', '"Courier New"', "monospace"],
+        sans: ["JetBrains Mono", "Courier New", "monospace"],
       },
       gridTemplateColumns: {
         5: "repeat(5, minmax(0, 1fr))",
