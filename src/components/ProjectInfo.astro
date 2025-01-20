@@ -1,4 +1,6 @@
 ---
+import InfoLine from "@components/InfoLine.astro";
+
 interface Props {
   year: number;
   materials: string;
@@ -8,32 +10,7 @@ const { year, materials, finish } = Astro.props;
 ---
 
 <section class="border-t border-stone-300">
-  <article>
-    <h2>Year</h2>
-    <p>{year}</p>
-  </article>
-  <article>
-    <h2>Materials</h2>
-    <p>{materials}</p>
-  </article>
-  {
-    finish && (
-      <article>
-        <h2>Finish</h2>
-        <p>{finish}</p>
-      </article>
-    )
-  }
+  <InfoLine label="Year" value={year} />
+  <InfoLine label="Materials" value={materials} />
+  {finish && <InfoLine label="Finish" value={finish} />}
 </section>
-
-<style>
-  article {
-    @apply grid min-h-8 grid-cols-6 items-center gap-6 border-b border-stone-300;
-  }
-  h2 {
-    @apply col-span-2 text-stone-600;
-  }
-  p {
-    @apply col-span-4 mb-0;
-  }
-</style>
