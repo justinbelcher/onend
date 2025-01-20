@@ -5,7 +5,7 @@ export const SITE_TITLE = "On end studio";
 export const SITE_DESCRIPTION = {
   short:
     "Justin Belcher is a designer and furniture maker based out of San Francisco, California.",
-  long: "Justin Belcher is a designer and furniture maker based out of San Francisco, California. His work focuses on unexpected forms grounded in a modern Nordic vernacular.",
+  long: "Justin Belcher is a designer and furniture maker based out of San Francisco, California. His work focuses on unexpected forms grounded in Nordic vernacular.",
 };
 export const SOCIAL_IMAGE = "https://onend.studio/onend-social.jpg";
 export const SOCIAL_LINKS = {
