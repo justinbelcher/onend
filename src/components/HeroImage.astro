@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
+
 import { getImages } from "@scripts/utils";
+import { MAX_HERO_WIDTH } from "@constants";
 
 interface Props {
   imagePath: string;
@@ -9,16 +11,26 @@ interface Props {
 }
 
 const { imagePath, altText, class: className } = Astro.props;
-const images = getImages();
+const allImages = getImages();
+if (!allImages[imagePath]) {
+  throw new Error(`"${imagePath}" does not exist"`);
+}
 
-if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist"`);
+const image = allImages[imagePath]();
+const { default: imageMetadata } = await image;
+
+const calculatedHeight = Math.round(
+  MAX_HERO_WIDTH * (imageMetadata.height / imageMetadata.width)
+);
 ---
 
 <section class={className}>
   <Image
     class="rounded object-cover object-center desktop:h-[calc(100vh-48px)]"
-    src={images[imagePath]()}
+    src={image}
     alt={altText}
+    width={MAX_HERO_WIDTH}
+    height={calculatedHeight}
     loading="eager"
   />
 </section>
