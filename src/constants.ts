@@ -46,5 +46,5 @@ export const PROJECT_ORDER = [
   "serving-boards",
   "knife-holer",
 ];
-export const MAX_GRID_WIDTH = 800;
+export const MAX_GRID_WIDTH = 640;
 export const MAX_HERO_WIDTH = 1200;
