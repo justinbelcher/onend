@@ -7,8 +7,7 @@ export const SITE_DESCRIPTION = {
     "Justin Belcher is a designer and furniture maker based out of San Francisco, California.",
   long: "Justin Belcher is a designer and furniture maker based out of San Francisco, California. His work focuses on unexpected forms grounded in a modern Nordic vernacular.",
 };
-export const SOCIAL_IMAGE =
-  "https://onend.studio/photos/coffeetable-front-640w.jpg";
+export const SOCIAL_IMAGE = "https://onend.studio/onend-social.jpg";
 export const SOCIAL_LINKS = {
   email: "hi@onendstudio.com",
   instagram: "https://instagram.com/onendstudio",
@@ -31,11 +30,11 @@ export const NAV_LINKS: NavLink[] = [
 export const PROJECT_ORDER = [
   "house-numbers",
   "critter-table",
-  "calhoun-table",
+  "custom-kitchen",
   "midcentury-crib",
   "library-builtins",
   "oak-desk",
-  "custom-kitchen",
+  "calhoun-table",
   "stands",
   "slab-table",
   "changing-table",

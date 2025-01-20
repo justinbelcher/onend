@@ -13,11 +13,10 @@ export default {
       fontSize: {
         sm: "0.5rem" /* 12px */,
         base: "1rem" /* 16px */,
-        xl: "1.2rem" /* 20px */,
+        xl: "1.375rem" /* 22px */,
         "2xl": "1.563rem" /* 25px */,
         "3xl": "1.953rem" /* 31px */,
-        "4xl": "2.441rem" /* 39px */,
-        "5xl": "3.052rem" /* 49px */,
+        "4xl": "3rem" /* 39px */,
       },
       borderRadius: {
         DEFAULT: "1.5vh",

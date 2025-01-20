@@ -6,4 +6,4 @@ I grew up as a farm kid in West Virginia, helping my family build fences, buildi
 
 My work focuses on unexpected forms grounded in a modern Nordic vernacular. I offer design services, millwork fabrication, and lovingly crafted, functional pieces of furniture made by hand under the indifferent oversight of my shop dog Luna.
 
-When not making furniture at my small home shop in the Castro or at Hunt Projects in the Bayview, I am a full-time designer and manager at Google in SF. Please get in touch if there's anything we can build together.
+When not making furniture at my small home shop in the Castro or at [Hunt Projects](https://www.huntprojects.org/about) in the Bayview, I am a full-time designer and manager at Google in SF. Please get in touch if there's anything we can build together.

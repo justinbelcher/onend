@@ -7,20 +7,19 @@ import type { NavLink } from "@types";
 
 interface Props {
   class?: string;
-  fullWidth?: boolean;
 }
 
 const { instagram } = SOCIAL_LINKS;
 
 const linkBaseClasses =
-  "relative text-xl no-underline w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-black after:w-full";
+  "relative text-xl uppercase no-underline w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-black after:w-full";
 const linkActiveClasses = linkBaseClasses;
 const linkInactiveClasses = `${linkBaseClasses} after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-175 after:origin-center`;
 
-const { fullWidth = false, class: className } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
-<nav class={twMerge("text-2xl uppercase grid grid-cols-subgrid", className)}>
+<nav class={twMerge("grid grid-cols-subgrid", className)}>
   {
     NAV_LINKS.map((link: NavLink) => (
       <a
