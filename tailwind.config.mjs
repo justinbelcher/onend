@@ -14,9 +14,9 @@ export default {
         sm: "0.5rem" /* 12px */,
         base: "1rem" /* 16px */,
         xl: "1.375rem" /* 22px */,
-        "2xl": "1.563rem" /* 25px */,
-        "3xl": "1.953rem" /* 31px */,
-        "4xl": "3rem" /* 39px */,
+        // "2xl": "1.563rem"
+        "3xl": "2.25rem" /* 36px */,
+        "4xl": "3rem" /* 48px */,
       },
       borderRadius: {
         DEFAULT: "1.5vh",

@@ -13,9 +13,14 @@ import {
 
 interface Props {
   pageTitle?: string;
+  hideGrid?: boolean;
   class?: string;
 }
-const { pageTitle, class: className = "grid-area-desktop" } = Astro.props;
+const {
+  pageTitle,
+  hideGrid = false,
+  class: className = "grid-area-desktop",
+} = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
 ---
 
@@ -32,12 +37,13 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     <meta property="og:image" content={SOCIAL_IMAGE} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-     <AstroFont
+    <AstroFont
       config={[
         {
           src: [],
           name: "JetBrains Mono",
-          googleFontsURL: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap",
+          googleFontsURL:
+            "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap",
           preload: true,
           display: "swap",
           selector: "body",
@@ -47,13 +53,21 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     />
   </head>
   <body class="text-stone-900 bg-stone-200 p-6 mobile:p-4">
-    <main
-      class={twMerge(
-        "grid gap-6 grid-cols-14 grid-rows-desktop mobile:grid-cols-5 mobile:grid-rows-mobile",
-        className
-      )}
-    >
-      <slot />
-    </main>
+    {
+      hideGrid ? (
+        <main>
+          <slot />
+        </main>
+      ) : (
+        <main
+          class={twMerge(
+            "grid gap-6 grid-cols-14 grid-rows-desktop mobile:grid-cols-5 mobile:grid-rows-mobile",
+            className
+          )}
+        >
+          <slot />
+        </main>
+      )
+    }
   </body>
 </html>
