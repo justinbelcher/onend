@@ -12,14 +12,10 @@ import Footer from "@components/Footer.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout {pageTitle} class="grid-areas-desktop mobile:grid-areas-mobile">
+<Layout {pageTitle} class="desktop:grid-areas-desktop grid-areas-mobile">
   <Logo class="grid-in-logo" />
   <Navigation class="grid-in-nav" />
   <slot name="content" />
   <slot name="hero" />
-  <Footer
-    class="grid-in-footer"
-    hideMarkOnDesktop={true}
-    hideMarkOnMobile={false}
-  />
+  <Footer hideMarkOnDesktop={true} hideMarkOnMobile={false} />
 </Layout>

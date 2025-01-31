@@ -11,11 +11,6 @@ interface Props {
 
 const { instagram } = SOCIAL_LINKS;
 
-const linkBaseClasses =
-  "relative text-xl uppercase no-underline w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-black after:w-full";
-const linkActiveClasses = linkBaseClasses;
-const linkInactiveClasses = `${linkBaseClasses} after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-175 after:origin-center`;
-
 const { class: className } = Astro.props;
 ---
 
@@ -24,11 +19,9 @@ const { class: className } = Astro.props;
     NAV_LINKS.map((link: NavLink) => (
       <a
         href={link.href}
-        class={
-          Astro.url.pathname.startsWith(link.href)
-            ? linkActiveClasses
-            : linkInactiveClasses
-        }
+        class="nav-link relative text-xl uppercase no-underline w-fit block"
+        data-active={Astro.url.pathname.startsWith(link.href)}
+        data-nav-link
       >
         {link.label}
       </a>
@@ -38,3 +31,23 @@ const { class: className } = Astro.props;
     ><Icon name="instagram" size="24" title="Instagram" /></a
   >
 </nav>
+
+<style>
+  .nav-link {
+    &::after {
+      position: absolute;
+      display: block;
+      content: "";
+      height: 2px;
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: all 0.175s ease-in-out;
+      background-color: var(--color-stone-900);
+    }
+    &[data-active="true"]::after,
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+</style>

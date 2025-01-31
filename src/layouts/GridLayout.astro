@@ -17,16 +17,12 @@ import Layout from "@layouts/Layout.astro";
 <Layout
   {pageTitle}
   class={twMerge(
-    "grid-areas-desktop-work mobile:grid-areas-mobile-work",
+    "desktop:grid-areas-desktop-work grid-areas-mobile-work",
     className
   )}
 >
   <Logo class="grid-in-logo" />
   <Navigation class="grid-in-nav" />
   <slot />
-  <Footer
-    class="grid-in-footer"
-    hideMarkOnDesktop={false}
-    hideMarkOnMobile={false}
-  />
+  <Footer hideMarkOnDesktop={false} hideMarkOnMobile={false} />
 </Layout>

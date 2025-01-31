@@ -22,17 +22,17 @@ const {
 
 <footer
   class={twMerge(
-    "grid desktop:grid-cols-subgrid mobile:grid-areas-mobile-footer mobile:gap-4 pb-8",
+    "grid grid-in-footer desktop:grid-cols-subgrid grid-areas-mobile-footer desktop:no-grid-template gap-4 desktop:pb-8",
     className
   )}
 >
-  <section class="desktop:col-span-2 mobile:grid-in-contact">
+  <section class="desktop:col-span-2 grid-in-contact">
     <h2>contact</h2>
     <address class="not-italic">
       <a href=`mailto:${email}`>{email}</a>
     </address>
   </section>
-  <section class="desktop:col-span-2 mobile:grid-in-ig">
+  <section class="desktop:col-span-2 grid-in-ig">
     <h2>instagram</h2>
     <a href={instagram}
       >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
@@ -40,9 +40,9 @@ const {
   </section>
   <div
     class={twMerge(
-      "flex justify-end desktop:col-start-[-1] mobile:grid-in-logo",
+      "flex justify-end desktop:col-start-[-1] grid-in-logo",
       hideMarkOnDesktop && "desktop:hidden",
-      hideMarkOnMobile && "mobile:hidden"
+      hideMarkOnMobile && "hidden desktop:block"
     )}
   >
     <Image src={logomark} alt="" width={48} height={48} />
