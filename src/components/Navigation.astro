@@ -11,10 +11,10 @@ interface Props {
 
 const { instagram } = SOCIAL_LINKS;
 
-const { class: className } = Astro.props;
+const { class: classes } = Astro.props;
 ---
 
-<nav class={twMerge("grid grid-cols-subgrid", className)}>
+<nav class={twMerge("grid grid-cols-subgrid", classes)}>
   {
     NAV_LINKS.map((link: NavLink) => (
       <a
@@ -42,8 +42,8 @@ const { class: className } = Astro.props;
       width: 100%;
       transform: scaleX(0);
       transform-origin: center;
-      transition: all 0.175s ease-in-out;
-      background-color: var(--color-stone-900);
+      transition: all var(--duration-short) var(--ease-standard);
+      background-color: var(--color-dark);
     }
     &[data-active="true"]::after,
     &:hover::after {

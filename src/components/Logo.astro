@@ -7,10 +7,10 @@ interface Props {
   class?: string;
 }
 
-const { class: className } = Astro.props;
+const { class: classes } = Astro.props;
 ---
 
-<header class={className}>
+<header class={classes}>
   <a href="/">
     <Image
       src={logoVertical}

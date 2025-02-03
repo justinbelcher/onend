@@ -12,7 +12,7 @@ interface Props {
   class?: string;
 }
 
-const { slug, name, year, imagePath, class: className } = Astro.props;
+const { slug, name, year, imagePath, class: classes } = Astro.props;
 
 const allImages = getImages();
 if (!(imagePath in allImages)) {
@@ -27,7 +27,7 @@ const calculatedHeight = Math.round(
 );
 ---
 
-<article class={`${className} group`}>
+<article class={`${classes} group`}>
   <a
     href={`work/${slug}`}
     title={`View details for ${name}`}

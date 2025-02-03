@@ -19,7 +19,7 @@ interface Props {
 const {
   pageTitle,
   hideGrid = false,
-  class: className = "grid-area-desktop",
+  class: classes = "grid-area-desktop",
 } = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
 ---
@@ -52,7 +52,7 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
       ]}
     />
   </head>
-  <body class="text-stone-900 bg-stone-200 p-4 desktop:p-6">
+  <body class="text-dark bg-light p-4 desktop:p-6">
     {
       hideGrid ? (
         <main>
@@ -62,7 +62,7 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
         <main
           class={twMerge(
             "grid gap-6 grid-cols-5 grid-rows-mobile desktop:grid-cols-14 desktop:grid-rows-desktop",
-            className
+            classes
           )}
         >
           <slot />

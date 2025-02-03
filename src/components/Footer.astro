@@ -16,14 +16,14 @@ const username = instagram.split("/").pop();
 const {
   hideMarkOnDesktop = false,
   hideMarkOnMobile = false,
-  class: className,
+  class: classes,
 } = Astro.props;
 ---
 
 <footer
   class={twMerge(
-    "grid grid-in-footer desktop:grid-cols-subgrid grid-areas-mobile-footer desktop:no-grid-template gap-4 desktop:pb-8",
-    className
+    "grid grid-in-footer desktop:grid-cols-subgrid grid-areas-mobile-footer desktop:no-grid-template gap-x-4 desktop:pb-8",
+    classes
   )}
 >
   <section class="desktop:col-span-2 grid-in-contact">

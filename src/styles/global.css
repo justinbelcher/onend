@@ -6,11 +6,15 @@
 
   --font-sans: "JetBrains Mono", "Courier New", monospace;
 
+  --color-light: var(--color-stone-200);
+  --color-dark: var(--color-stone-900);
+  --color-selection: var(--color-yellow-300);
+
   --text-sm : 0.5rem;
   --text-base: 1rem;
   --text-xl: 1.375rem;
   --text-3xl: 2.25rem;
-  --text-4xl: 3rem;
+  --text-4xl: 2.5rem;
 
   --radius-sm: 1.5vh;
 
@@ -21,6 +25,9 @@
   --area-footer: footer;  
   --area-ig: ig;
   --area-contact: contact;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1.0);
+  --duration-short: 0.2s;
 }
 
 @layer base {
@@ -33,6 +40,9 @@
   }
   p {
     margin-bottom: 1.5rem;
+  }
+  ::selection {
+    background-color: var(--color-selection);
   }
 }
 

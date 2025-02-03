@@ -9,7 +9,7 @@ interface Props {
   class?: string;
 }
 
-const { photos, class: className } = Astro.props;
+const { photos, class: classes } = Astro.props;
 const allImages = getImages();
 photos.forEach((path: string) => {
   if (!(path in allImages)) {
@@ -19,7 +19,7 @@ photos.forEach((path: string) => {
 const totalPhotos = photos.length;
 ---
 
-<div class={twMerge("relative", className)}>
+<div class={twMerge("relative", classes)}>
   <ul
     id="carousel"
     class="flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"

@@ -5,7 +5,7 @@ interface Props {
   class?: string;
 }
 
-const { pageTitle, class: className } = Astro.props;
+const { pageTitle, class: classes } = Astro.props;
 
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
@@ -18,7 +18,7 @@ import Layout from "@layouts/Layout.astro";
   {pageTitle}
   class={twMerge(
     "desktop:grid-areas-desktop-work grid-areas-mobile-work",
-    className
+    classes
   )}
 >
   <Logo class="grid-in-logo" />

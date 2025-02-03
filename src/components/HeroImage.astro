@@ -10,7 +10,7 @@ interface Props {
   class?: string;
 }
 
-const { imagePath, altText, class: className } = Astro.props;
+const { imagePath, altText, class: classes } = Astro.props;
 const allImages = getImages();
 if (!allImages[imagePath]) {
   throw new Error(`"${imagePath}" does not exist"`);
@@ -24,7 +24,7 @@ const calculatedHeight = Math.round(
 );
 ---
 
-<section class={className}>
+<section class={classes}>
   <Image
     class="rounded-sm object-cover object-center desktop:h-[calc(100vh-48px)]"
     src={image}
