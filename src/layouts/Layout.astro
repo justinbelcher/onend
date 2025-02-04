@@ -2,7 +2,6 @@
 import "@styles/global.css";
 
 import { twMerge } from "tailwind-merge";
-import { AstroFont } from "astro-font";
 
 import {
   THEME_COLOR,
@@ -37,19 +36,11 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     <meta property="og:image" content={SOCIAL_IMAGE} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <AstroFont
-      config={[
-        {
-          src: [],
-          name: "JetBrains Mono",
-          googleFontsURL:
-            "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;1,300&display=swap",
-          preload: true,
-          display: "swap",
-          selector: "body",
-          fallback: "monospace",
-        },
-      ]}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+      rel="stylesheet"
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
