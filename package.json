@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
     "@astrojs/vercel": "^8.0.5",
     "astro": "^5.2.1",
     "astro-font": "^1.0.0",
