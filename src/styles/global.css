@@ -6,8 +6,11 @@
 
   --font-sans: "JetBrains Mono", "Courier New", monospace;
 
-  --color-light: var(--color-stone-200);
-  --color-dark: var(--color-stone-900);
+  --color-surface: var(--color-stone-200);
+  --color-primary: var(--color-stone-900);
+  --color-secondary: var(--color-stone-600);
+  --color-divider: var(--color-stone-300);
+  --color-overlay: var(--color-stone-50);
   --color-selection: var(--color-yellow-300);
 
   --text-sm : 0.5rem;

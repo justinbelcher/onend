@@ -39,7 +39,7 @@ const totalPhotos = photos.length;
   </ul>
   {
     totalPhotos > 1 && (
-      <div class="absolute bottom-3 right-3 bg-stone-50/75 text-stone-600 px-2 rounded-lg flex items-center">
+      <div class="absolute bottom-3 right-3 bg-overlay/75 text-secondary px-2 rounded-lg flex items-center">
         <span id="curr-item">01</span>/
         <span>{totalPhotos.toString().padStart(2, "0")}</span>
       </div>

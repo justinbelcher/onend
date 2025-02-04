@@ -9,7 +9,7 @@ interface Props {
 const { year, materials, finish } = Astro.props;
 ---
 
-<section class="border-t border-stone-300">
+<section class="border-t border-divider">
   <InfoLine label="Year" value={year} />
   <InfoLine label="Materials" value={materials} />
   {finish && <InfoLine label="Finish" value={finish} />}
