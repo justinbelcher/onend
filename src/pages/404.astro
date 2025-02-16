@@ -3,12 +3,12 @@ import { Image } from "astro:assets";
 import fourOhFour from "../assets/404.jpg";
 
 import Layout from "@layouts/Layout.astro";
-
-const currentPath = Astro.url.pathname;
 ---
 
 <Layout hideGrid={true} pageTitle="404">
-  <div class="h-[calc(100vh-48px)] flex gap-10 justify-center items-center">
+  <div
+    class="h-[calc(100vh-48px)] flex flex-col desktop:flex-row gap-10 justify-center items-center"
+  >
     <Image
       src={fourOhFour}
       width={200}
@@ -18,15 +18,23 @@ const currentPath = Astro.url.pathname;
     <div>
       <h1 class="text-4xl mb-4 font-bold">404</h1>
       <p>
-        Well this is awkward... <code class="bg-yellow-100">{currentPath}</code>
-        not found.
+        Hmm... I couldn't find <code id="pathname" class="bg-yellow-100"
+          >/404</code
+        >.
       </p>
       <p class="mb-0">Head back <a href="/">home?</a></p>
     </div>
-    <code>{JSON.stringify(Astro.url)}</code>
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const el = document.getElementById("pathname");
+      if (!el) return;
+
+      const pathname = new URL(window.location.href).pathname;
+      el.textContent = pathname;
+    });
+
     import { PowerGlitch } from "https://unpkg.com/powerglitch@2.4.0/lib/index.esm.js";
 
     if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
