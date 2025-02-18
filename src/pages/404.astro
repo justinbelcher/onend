@@ -26,14 +26,15 @@ import Layout from "@layouts/Layout.astro";
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const el = document.getElementById("pathname");
-      if (!el) return;
-
-      const pathname = new URL(window.location.href).pathname;
-      el.textContent = pathname;
-    });
+  <script is:inline>
+    (() => {
+      document.addEventListener("DOMContentLoaded", () => {
+        const el = document.getElementById("pathname");
+        if (el) {
+          el.textContent = new URL(window.location.href).pathname;
+        }
+      });
+    })();
 
     import { PowerGlitch } from "https://unpkg.com/powerglitch@2.4.0/lib/index.esm.js";
 
