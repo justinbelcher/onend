@@ -1,20 +1,15 @@
 ---
-import { Image } from "astro:assets";
-import fourOhFour from "../assets/404.jpg";
-
 import Layout from "@layouts/Layout.astro";
+import NotFoundScene from "../components/NotFoundScene";
 ---
 
 <Layout hideGrid={true} pageTitle="404">
   <div
     class="h-[calc(100vh-48px)] flex flex-col desktop:flex-row gap-12 justify-center items-center"
   >
-    <Image
-      src={fourOhFour}
-      width={240}
-      alt="A meme image of the book Identifying Wood"
-      class="book"
-    />
+    <div class="w-[400px] h-[400px]">
+      <NotFoundScene client:load />
+    </div>
     <div>
       <h1 class="text-4xl mb-4 font-bold">404</h1>
       <p>
@@ -25,29 +20,4 @@ import Layout from "@layouts/Layout.astro";
       <p class="mb-0">Head back <a href="/">home?</a></p>
     </div>
   </div>
-
-  <script type="module">
-    (() => {
-      document.addEventListener("DOMContentLoaded", () => {
-        const el = document.getElementById("pathname");
-        if (el) {
-          el.textContent = new URL(window.location.href).pathname;
-        }
-      });
-    })();
-
-    import { PowerGlitch } from "https://unpkg.com/powerglitch@2.4.0/lib/index.esm.js";
-
-    if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
-      PowerGlitch.glitch(".book", {
-        timing: {
-          duration: 3000,
-        },
-        glitchTimeSpan: {
-          start: 0,
-          end: 0.2,
-        },
-      });
-    }
-  </script>
 </Layout>
