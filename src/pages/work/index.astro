@@ -1,22 +1,28 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+
 import ProjectCard from "@components/ProjectCard.astro";
 import Layout from "@layouts/GridLayout.astro";
 
 import { getOrderedProjects } from "@scripts/utils";
 
+import { styles } from "@styles/pages/work-index";
+
 const projects = await getOrderedProjects();
+
+const gridAttrs = stylex.attrs(styles.projectGrid);
 ---
 
-<Layout class="pb-6">
-  <section class="grid grid-in-main grid-cols-1 desktop:grid-cols-12 gap-6">
+<Layout style={styles.page}>
+  <section {...gridAttrs}>
     {
-      projects.map((project: any) => (
+      projects.map((project) => (
         <ProjectCard
           slug={project.id}
           name={project.data.name}
           year={project.data.year}
-          imagePath={project.data.cover}
-          class="col-span-3"
+          image={project.data.cover}
+          style={styles.card}
         />
       ))
     }

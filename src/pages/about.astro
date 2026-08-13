@@ -1,8 +1,14 @@
 ---
 import { getEntry, render } from "astro:content";
+import * as stylex from "@stylexjs/stylex";
 
 import PageLayout from "@layouts/PageLayout.astro";
 import HeroImage from "@components/HeroImage.astro";
+
+import headshot from "../assets/me.webp";
+
+import { grid } from "@styles/shared";
+import { styles } from "@styles/pages/about";
 
 const bio = await getEntry("text", "bio");
 
@@ -13,11 +19,14 @@ if (!bio) {
 const { Content: Bio } = await render(bio);
 
 const { byline } = bio.data;
+
+const contentAttrs = stylex.attrs(grid.inMain);
+const bylineAttrs = stylex.attrs(styles.byline);
 ---
 
 <PageLayout pageTitle="About">
-  <section slot="content" class="grid-in-main">
-    <h1 class="text-3xl desktop:text-4xl mb-5 leading-tight uppercase">
+  <section slot="content" {...contentAttrs}>
+    <h1 {...bylineAttrs}>
       {byline}
     </h1>
     <Bio />
@@ -25,8 +34,8 @@ const { byline } = bio.data;
 
   <HeroImage
     slot="hero"
-    imagePath="/src/assets/me.webp"
+    image={headshot}
     altText="Headshot of Justin"
-    class="grid-in-hero"
+    style={grid.inHero}
   />
 </PageLayout>

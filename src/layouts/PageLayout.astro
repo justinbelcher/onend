@@ -10,11 +10,14 @@ import Navigation from "@components/Navigation.astro";
 import Footer from "@components/Footer.astro";
 
 import Layout from "@layouts/Layout.astro";
+
+import { grid } from "@styles/shared";
+import { styles } from "./PageLayout.styles";
 ---
 
-<Layout {pageTitle} class="desktop:grid-areas-desktop grid-areas-mobile">
-  <Logo class="grid-in-logo" />
-  <Navigation class="grid-in-nav" />
+<Layout {pageTitle} style={styles.areas}>
+  <Logo style={grid.inLogo} />
+  <Navigation style={grid.inNav} />
   <slot name="content" />
   <slot name="hero" />
   <Footer hideMarkOnDesktop={true} hideMarkOnMobile={false} />

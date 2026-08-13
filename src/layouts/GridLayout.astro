@@ -1,28 +1,26 @@
 ---
-import { twMerge } from "tailwind-merge";
+import type { StyleXStyles } from "@stylexjs/stylex";
+
 interface Props {
   pageTitle?: string;
-  class?: string;
+  style?: StyleXStyles;
 }
 
-const { pageTitle, class: classes } = Astro.props;
+const { pageTitle, style } = Astro.props;
 
 import Logo from "@components/Logo.astro";
 import Navigation from "@components/Navigation.astro";
 import Footer from "@components/Footer.astro";
 
 import Layout from "@layouts/Layout.astro";
+
+import { grid } from "@styles/shared";
+import { styles } from "./GridLayout.styles";
 ---
 
-<Layout
-  {pageTitle}
-  class={twMerge(
-    "desktop:grid-areas-desktop-work grid-areas-mobile-work",
-    classes
-  )}
->
-  <Logo class="grid-in-logo" />
-  <Navigation class="grid-in-nav" />
+<Layout {pageTitle} style={[styles.areas, style]}>
+  <Logo style={grid.inLogo} />
+  <Navigation style={grid.inNav} />
   <slot />
   <Footer hideMarkOnDesktop={false} hideMarkOnMobile={false} />
 </Layout>

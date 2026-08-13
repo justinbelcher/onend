@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei";
-import { MeshStandardMaterial, NearestFilter, LinearFilter } from "three";
+import { MeshStandardMaterial, LinearFilter } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 
 export default function Book3D() {

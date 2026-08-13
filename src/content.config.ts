@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const text = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/text" }),
@@ -9,17 +10,18 @@ const text = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/projects" }),
-  schema: z.object({
-    isDraft: z.boolean(),
-    name: z.string(),
-    year: z.number(),
-    materials: z.string(),
-    finish: z.string().optional(),
-    client: z.string().optional(),
-    cover: z.string(),
-    photos: z.array(z.string()),
-  }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+  schema: ({ image }) =>
+    z.object({
+      isDraft: z.boolean(),
+      name: z.string(),
+      year: z.number(),
+      materials: z.string(),
+      finish: z.string().optional(),
+      client: z.string().optional(),
+      cover: image(),
+      photos: z.array(image()),
+    }),
 });
 
 export const collections = { projects, text };

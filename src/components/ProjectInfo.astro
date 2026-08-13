@@ -1,5 +1,9 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+
 import InfoLine from "@components/InfoLine.astro";
+
+import { styles } from "./ProjectInfo.styles";
 
 interface Props {
   year: number;
@@ -7,9 +11,11 @@ interface Props {
   finish?: string;
 }
 const { year, materials, finish } = Astro.props;
+
+const sectionAttrs = stylex.attrs(styles.section);
 ---
 
-<section class="border-t border-divider">
+<section {...sectionAttrs}>
   <InfoLine label="Year" value={year} />
   <InfoLine label="Materials" value={materials} />
   {finish && <InfoLine label="Finish" value={finish} />}

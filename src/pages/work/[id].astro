@@ -1,49 +1,38 @@
 ---
 import { getCollection, render } from "astro:content";
+import * as stylex from "@stylexjs/stylex";
+
 import PageLayout from "@layouts/PageLayout.astro";
 
 import ProjectInfo from "@components/ProjectInfo.astro";
 import Carousel from "@components/Carousel.astro";
 
+import { grid } from "@styles/shared";
+import { styles } from "@styles/pages/work-detail";
+
 export async function getStaticPaths() {
-  const posts = await getCollection("projects");
-  return posts.map((project) => {
-    return {
-      params: { id: project.id },
-      props: { project },
-    };
-  });
+  const projects = await getCollection("projects", ({ data }) => !data.isDraft);
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
 }
 
 const { project } = Astro.props;
 const { Content } = await render(project);
 const { name, photos, year, materials, finish } = project.data;
+
+const detailsAttrs = stylex.attrs(styles.details);
+const titleAttrs = stylex.attrs(styles.title);
 ---
 
 <PageLayout pageTitle={name}>
-  <section
-    slot="content"
-    class="grid-in-main flex flex-col justify-between mb-6"
-  >
-    <h1 class="text-4xl my-5 leading-tight uppercase">{name}</h1>
+  <section slot="content" {...detailsAttrs}>
+    <h1 {...titleAttrs}>{name}</h1>
     <div>
       <Content />
       <ProjectInfo {year} {materials} {finish} />
     </div>
   </section>
-  <Carousel {photos} slot="hero" class="grid-in-hero" />
+  <Carousel {photos} {name} slot="hero" style={grid.inHero} />
 </PageLayout>
-
-<!-- <PageLayout pageTitle="About">
-  <section slot="content" class="grid-in-main">
-    <h1 class="text-4xl mb-5 leading-tight uppercase">{byline}</h1>
-    <Bio />
-  </section>
-
-  <HeroImage
-    slot="hero"
-    imagePath="/src/assets/me.webp"
-    altText="Headshot of Justin"
-    class="grid-in-hero"
-  />
-</PageLayout> -->

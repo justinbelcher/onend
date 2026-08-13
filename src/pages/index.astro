@@ -1,28 +1,33 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+
 import PageLayout from "@layouts/PageLayout.astro";
 import HeroImage from "@components/HeroImage.astro";
+
+import desktopHero from "../assets/work/coffeetable-intro.jpg";
+import mobileHero from "../assets/work/coffeetable-1.jpg";
+
+import { grid } from "@styles/shared";
+import { styles } from "@styles/pages/home";
+
+const introAttrs = stylex.attrs(styles.intro);
+const headlineAttrs = stylex.attrs(styles.headline);
+const locationAttrs = stylex.attrs(styles.location);
 ---
 
 <PageLayout>
-  <section slot="content" class="grid-in-main content-end">
-    <h1
-      class="text-[9vw] desktop:text-[3.7vw] leading-[1.1] font-light uppercase"
-    >
+  <section slot="content" {...introAttrs}>
+    <h1 {...headlineAttrs}>
       ~~> Some really nice things for your home ¤ Made upright with care by
-      Justin Belcher in <i class="tracking-tighter">San Francisco</i>.
+      Justin Belcher in <i {...locationAttrs}>San Francisco</i>.
     </h1>
   </section>
 
   <HeroImage
     slot="hero"
-    imagePath="/src/assets/work/coffeetable-intro.jpg"
+    image={desktopHero}
+    mobileImage={mobileHero}
     altText="Front view of a walnut coffee table"
-    class="hidden desktop:block grid-in-hero"
-  />
-  <HeroImage
-    slot="hero"
-    imagePath="/src/assets/work/coffeetable-1.jpg"
-    altText="Front view of a walnut coffee table"
-    class="desktop:hidden grid-in-hero"
+    style={grid.inHero}
   />
 </PageLayout>

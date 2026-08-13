@@ -1,37 +1,39 @@
 ---
-import { twMerge } from "tailwind-merge";
 import { Image } from "astro:assets";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
-import { getImages } from "@scripts/utils";
+import { MAX_HERO_WIDTH } from "@constants";
+
+import { styles } from "./Carousel.styles";
 
 interface Props {
-  photos: string[];
-  class?: string;
+  photos: ImageMetadata[];
+  name: string;
+  style?: StyleXStyles;
 }
 
-const { photos, class: classes } = Astro.props;
-const allImages = getImages();
-photos.forEach((path: string) => {
-  if (!(path in allImages)) {
-    throw new Error(`Image not found: ${path}`);
-  }
-});
+const { photos, name, style } = Astro.props;
 const totalPhotos = photos.length;
+
+const wrapperAttrs = stylex.attrs(styles.wrapper, style);
+const trackAttrs = stylex.attrs(styles.track);
+const slideAttrs = stylex.attrs(styles.slide);
+const imageAttrs = stylex.attrs(styles.image);
+const counterAttrs = stylex.attrs(styles.counter);
 ---
 
-<div class={twMerge("relative", classes)}>
-  <ul
-    id="carousel"
-    class="flex gap-2 overflow-x-scroll no-scrollbars snap-mandatory snap-x w-full"
-    data-total={totalPhotos}
-  >
+<div {...wrapperAttrs} data-carousel>
+  <ul {...trackAttrs} data-carousel-track>
     {
-      photos.map((path: string) => (
-        <li class="snap-center desktop:h-[calc(100vh-48px)] flex-shrink-0 w-full">
+      photos.map((photo) => (
+        <li class={slideAttrs.class} style={slideAttrs.style}>
           <Image
-            src={allImages[path]()}
-            alt="Photo of piece"
-            class="rounded-sm object-cover object-center h-full user-select: none"
+            src={photo}
+            alt={`Photo of ${name}`}
+            width={MAX_HERO_WIDTH}
+            class={imageAttrs.class}
+            style={imageAttrs.style}
           />
         </li>
       ))
@@ -39,8 +41,8 @@ const totalPhotos = photos.length;
   </ul>
   {
     totalPhotos > 1 && (
-      <div class="absolute bottom-3 right-3 bg-overlay/75 text-secondary px-2 rounded-lg flex items-center">
-        <span id="curr-item">01</span>/
+      <div class={counterAttrs.class} style={counterAttrs.style}>
+        <span data-carousel-current>01</span>/
         <span>{totalPhotos.toString().padStart(2, "0")}</span>
       </div>
     )
@@ -50,13 +52,11 @@ const totalPhotos = photos.length;
 <script>
   import { initCarousel } from "@scripts/carousel";
 
-  const carouselEl = document.getElementById("carousel");
-  const labelEl = document.getElementById("curr-item");
-
-  if (carouselEl && labelEl) {
-    const totalPhotos = Number(carouselEl.getAttribute("data-total"));
-    if (totalPhotos > 1) {
-      initCarousel(carouselEl, labelEl);
-    }
-  }
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-carousel-track]");
+    const label = root.querySelector<HTMLElement>("[data-carousel-current]");
+    // The counter (and with it the label) only renders for multi-photo
+    // carousels, which are the only ones that need interaction.
+    if (track && label) initCarousel(track, label);
+  });
 </script>

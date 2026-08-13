@@ -1,14 +1,17 @@
 ---
-import { twMerge } from "tailwind-merge";
 import { Image } from "astro:assets";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 import logomark from "../assets/logomark.svg";
 
 interface Props {
   hideMarkOnDesktop?: boolean;
   hideMarkOnMobile?: boolean;
-  class?: string;
+  style?: StyleXStyles;
 }
 import { SOCIAL_LINKS } from "src/constants";
+
+import { styles } from "./Footer.styles";
 
 const { instagram, email } = SOCIAL_LINKS;
 const username = instagram.split("/").pop();
@@ -16,35 +19,35 @@ const username = instagram.split("/").pop();
 const {
   hideMarkOnDesktop = false,
   hideMarkOnMobile = false,
-  class: classes,
+  style,
 } = Astro.props;
+
+const footerAttrs = stylex.attrs(styles.footer, style);
+const contactAttrs = stylex.attrs(styles.contact);
+const igAttrs = stylex.attrs(styles.ig);
+const addressAttrs = stylex.attrs(styles.address);
+const visuallyHiddenAttrs = stylex.attrs(styles.visuallyHidden);
+const markAttrs = stylex.attrs(
+  styles.mark,
+  hideMarkOnDesktop && styles.markHiddenOnDesktop,
+  hideMarkOnMobile && styles.markHiddenOnMobile
+);
 ---
 
-<footer
-  class={twMerge(
-    "grid grid-in-footer desktop:grid-cols-subgrid grid-areas-mobile-footer desktop:no-grid-template gap-4 desktop:gap-y-0 desktop:pb-8",
-    classes
-  )}
->
-  <section class="desktop:col-span-2 grid-in-contact">
+<footer {...footerAttrs}>
+  <section {...contactAttrs}>
     <h2>contact</h2>
-    <address class="not-italic">
+    <address {...addressAttrs}>
       <a href=`mailto:${email}`>{email}</a>
     </address>
   </section>
-  <section class="desktop:col-span-2 grid-in-ig">
+  <section {...igAttrs}>
     <h2>instagram</h2>
     <a href={instagram}
-      >@{username}<span class="visually-hidden">(Instagram Profile)</span></a
+      >@{username}<span {...visuallyHiddenAttrs}>(Instagram Profile)</span></a
     >
   </section>
-  <div
-    class={twMerge(
-      "flex justify-end desktop:col-start-[-1] grid-in-logo",
-      hideMarkOnDesktop && "desktop:hidden",
-      hideMarkOnMobile && "hidden desktop:block"
-    )}
-  >
+  <div {...markAttrs}>
     <Image src={logomark} alt="" width={48} height={48} />
   </div>
 </footer>

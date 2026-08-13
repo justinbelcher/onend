@@ -1,36 +1,63 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
-import { getImages } from "@scripts/utils";
 import { MAX_HERO_WIDTH } from "@constants";
+import { DESKTOP_MEDIA_QUERY } from "@constants";
+
+import { styles } from "./HeroImage.styles";
 
 interface Props {
-  imagePath: string;
+  image: ImageMetadata;
   altText: string;
-  class?: string;
+  /**
+   * Art direction: when provided, `image` is shown on desktop and
+   * `mobileImage` below the desktop breakpoint — as a single <picture>
+   * element, so browsers only download the variant they display.
+   */
+  mobileImage?: ImageMetadata;
+  style?: StyleXStyles | ReadonlyArray<StyleXStyles>;
 }
 
-const { imagePath, altText, class: classes } = Astro.props;
-const allImages = getImages();
-if (!allImages[imagePath]) {
-  throw new Error(`"${imagePath}" does not exist"`);
-}
+const { image, altText, mobileImage, style } = Astro.props;
 
-const image = allImages[imagePath]();
-const { default: imageMetadata } = await image;
+const sectionAttrs = stylex.attrs(style);
+const imageAttrs = stylex.attrs(styles.image);
 
-const calculatedHeight = Math.round(
-  MAX_HERO_WIDTH * (imageMetadata.height / imageMetadata.width)
-);
+const desktopSource = mobileImage
+  ? await getImage({ src: image, width: MAX_HERO_WIDTH })
+  : null;
 ---
 
-<section class={classes}>
-  <Image
-    class="rounded-sm object-cover object-center desktop:h-[calc(100vh-48px)]"
-    src={image}
-    alt={altText}
-    width={MAX_HERO_WIDTH}
-    height={calculatedHeight}
-    loading="eager"
-  />
+<section {...sectionAttrs}>
+  {
+    mobileImage && desktopSource ? (
+      <picture>
+        <source
+          media={DESKTOP_MEDIA_QUERY}
+          srcset={desktopSource.srcSet.attribute || desktopSource.src}
+          width={desktopSource.attributes.width}
+          height={desktopSource.attributes.height}
+        />
+        <Image
+          src={mobileImage}
+          alt={altText}
+          width={MAX_HERO_WIDTH}
+          loading="eager"
+          class={imageAttrs.class}
+          style={imageAttrs.style}
+        />
+      </picture>
+    ) : (
+      <Image
+        src={image}
+        alt={altText}
+        width={MAX_HERO_WIDTH}
+        loading="eager"
+        class={imageAttrs.class}
+        style={imageAttrs.style}
+      />
+    )
+  }
 </section>

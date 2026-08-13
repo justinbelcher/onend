@@ -1,118 +1,237 @@
-@import "tailwindcss";
+/*
+ * Base stylesheet.
+ *
+ * 1. A browser reset (ported verbatim from the previous Tailwind v4 preflight
+ *    so rendering stays identical).
+ * 2. Base element styles, which also apply to markdown-rendered content
+ *    where per-element StyleX classes cannot be attached.
+ * 3. The `@stylex;` directive, replaced at build time with the CSS compiled
+ *    from all stylex.create() calls by @stylexjs/postcss-plugin.
+ */
 
-@theme {
-  --breakpoint-*: initial;
-  --breakpoint-desktop: 768px;
-
-  --font-sans: "JetBrains Mono", "Courier New", monospace;
-
-  --color-surface: var(--color-stone-200);
-  --color-primary: var(--color-stone-900);
-  --color-secondary: var(--color-stone-600);
-  --color-divider: var(--color-stone-300);
-  --color-overlay: var(--color-stone-50);
-  --color-selection: var(--color-yellow-300);
-
-  --text-sm: 0.5rem;
-  --text-base: 1rem;
-  --text-xl: 1.375rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 2.5rem;
-
-  --radius-sm: 1.5vh;
-
-  --area-logo: logo;
-  --area-nav: nav;
-  --area-main: main;
-  --area-hero: hero;
-  --area-footer: footer;
-  --area-ig: ig;
-  --area-contact: contact;
-
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --duration-short: 0.2s;
+*,
+::after,
+::before,
+::backdrop {
+  box-sizing: border-box;
+  border: 0 solid;
+  margin: 0;
+  padding: 0;
 }
-
-@layer base {
-  html,
-  body {
-    min-height: 100vh;
+::file-selector-button {
+  box-sizing: border-box;
+  border: 0 solid;
+  margin: 0;
+  padding: 0;
+}
+html,
+:host {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  line-height: 1.5;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+hr {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+}
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+a {
+  color: inherit;
+  -webkit-text-decoration: inherit;
+  text-decoration: inherit;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  font-size: 1em;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+}
+sub {
+  bottom: -0.25em;
+}
+sup {
+  top: -0.5em;
+}
+table {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+:-moz-focusring {
+  outline: auto;
+}
+progress {
+  vertical-align: baseline;
+}
+summary {
+  display: list-item;
+}
+ol,
+ul,
+menu {
+  list-style: none;
+}
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  vertical-align: middle;
+  display: block;
+}
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+button,
+input,
+select,
+optgroup,
+textarea {
+  font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  opacity: 1;
+  background-color: #0000;
+  border-radius: 0;
+}
+::file-selector-button {
+  font: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  opacity: 1;
+  background-color: #0000;
+  border-radius: 0;
+}
+:where(select:is([multiple], [size])) optgroup {
+  font-weight: bolder;
+}
+:where(select:is([multiple], [size])) optgroup option {
+  padding-inline-start: 20px;
+}
+::file-selector-button {
+  margin-inline-end: 4px;
+}
+::placeholder {
+  opacity: 1;
+}
+@supports (not ((-webkit-appearance: -apple-pay-button))) or
+  (contain-intrinsic-size: 1px) {
+  ::placeholder {
+    color: currentColor;
   }
-  a {
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
+  @supports (color: color-mix(in lab, red, red)) {
+    ::placeholder {
+      color: color-mix(in oklab, currentcolor 50%, transparent);
     }
   }
-  p {
-    margin-bottom: 1.5rem;
-  }
-  ::selection {
-    background-color: var(--color-selection);
-  }
 }
-
-@utility visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
+textarea {
+  resize: vertical;
+}
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-date-and-time-value {
+  min-height: 1lh;
+  text-align: inherit;
+}
+::-webkit-datetime-edit {
+  display: inline-flex;
+  padding-block: 0;
+}
+::-webkit-datetime-edit-fields-wrapper {
   padding: 0;
-  position: absolute;
-  width: 1px;
-  white-space: nowrap;
+}
+::-webkit-datetime-edit-year-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-minute-field,
+::-webkit-datetime-edit-second-field,
+::-webkit-datetime-edit-millisecond-field,
+::-webkit-datetime-edit-meridiem-field {
+  padding-block: 0;
+}
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+button,
+input:where([type="button"], [type="reset"], [type="submit"]) {
+  appearance: button;
+}
+::file-selector-button {
+  appearance: button;
+}
+::-webkit-inner-spin-button {
+  height: auto;
+}
+::-webkit-outer-spin-button {
+  height: auto;
+}
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none !important;
 }
 
-@utility no-scrollbars {
-  scrollbar-width: none;
+/* Base element styles (also style markdown-rendered content). */
+html,
+body {
+  min-height: 100vh;
+}
+a {
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+p {
+  margin-bottom: 1.5rem;
+}
+::selection {
+  background-color: oklch(90.5% 0.182 98.111);
 }
 
-@utility grid-areas-desktop {
-  grid-template-areas:
-    "logo nav nav nav nav nav nav hero hero hero hero hero hero hero"
-    "logo main main main main main main hero hero hero hero hero hero hero"
-    "logo footer footer footer footer footer footer hero hero hero hero hero hero hero";
-}
-@utility grid-areas-desktop-work {
-  grid-template-areas:
-    "logo nav nav nav nav nav nav nav nav nav nav nav nav nav"
-    "logo main main main main main main main main main main main main main"
-    "logo footer footer footer footer footer footer footer footer footer footer footer footer footer";
-}
-@utility grid-areas-mobile {
-  grid-template-areas:
-    "logo logo logo logo logo"
-    "nav nav nav nav nav"
-    "hero hero hero hero hero"
-    "main main main main main"
-    "footer footer footer footer footer";
-}
-@utility grid-areas-mobile-work {
-  grid-template-areas:
-    "logo logo logo logo logo"
-    "nav nav nav nav nav"
-    "main main main main main"
-    "footer footer footer footer footer";
-}
-
-@utility grid-areas-mobile-footer {
-  grid-template-areas:
-    "contact logo"
-    "ig logo";
-}
-@utility no-grid-template {
-  grid-template-areas: none;
-}
-
-@utility grid-rows-desktop {
-  grid-template-rows: 2rem 1fr 3rem;
-}
-@utility grid-rows-mobile {
-  grid-template-rows: repeat(5, auto);
-}
-
-@utility grid-in-* {
-  grid-area: --value(--area- *);
-}
+@stylex;

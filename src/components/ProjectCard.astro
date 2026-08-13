@@ -1,50 +1,45 @@
 ---
 import { Image } from "astro:assets";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
-import { getImages } from "@scripts/utils";
 import { MAX_GRID_WIDTH } from "@constants";
+
+import { cardMarker, styles } from "./ProjectCard.styles";
 
 interface Props {
   slug: string;
   name: string;
   year: number;
-  imagePath: string;
-  class?: string;
+  image: ImageMetadata;
+  style?: StyleXStyles;
 }
 
-const { slug, name, year, imagePath, class: classes } = Astro.props;
+const { slug, name, year, image, style } = Astro.props;
 
-const allImages = getImages();
-if (!(imagePath in allImages)) {
-  throw new Error(`Cover image not found: ${imagePath}`);
-}
-
-const image = allImages[imagePath]();
-const { default: imageMetadata } = await image;
-
-const calculatedHeight = Math.round(
-  MAX_GRID_WIDTH * (imageMetadata.height / imageMetadata.width)
-);
+const cardAttrs = stylex.attrs(style, cardMarker);
+const linkAttrs = stylex.attrs(styles.link);
+const imageFrameAttrs = stylex.attrs(styles.imageFrame);
+const imageAttrs = stylex.attrs(styles.image);
+const captionAttrs = stylex.attrs(styles.caption);
+const titleAttrs = stylex.attrs(styles.title);
+const yearAttrs = stylex.attrs(styles.year);
 ---
 
-<article class={`${classes} group`}>
-  <a
-    href={`work/${slug}`}
-    title={`View details for ${name}`}
-    class="no-underline"
-  >
-    <div class="relative w-full overflow-hidden rounded-sm">
+<article {...cardAttrs}>
+  <a href={`/work/${slug}`} title={`View details for ${name}`} {...linkAttrs}>
+    <div {...imageFrameAttrs}>
       <Image
         src={image}
         alt={`Photo of ${name}`}
         width={MAX_GRID_WIDTH}
-        height={calculatedHeight}
-        class="duration-175 w-full object-cover object-center transition-transform group-hover:scale-110"
+        class={imageAttrs.class}
+        style={imageAttrs.style}
       />
     </div>
-    <aside class="flex-cols flex justify-between pt-2">
-      <h1 class="uppercase group-hover:underline">{name}</h1>
-      <p class="mb-0 text-secondary">{year}</p>
+    <aside {...captionAttrs}>
+      <h1 {...titleAttrs}>{name}</h1>
+      <p {...yearAttrs}>{year}</p>
     </aside>
   </a>
 </article>

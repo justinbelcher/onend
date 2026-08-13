@@ -1,7 +1,8 @@
 ---
 import "@styles/global.css";
 
-import { twMerge } from "tailwind-merge";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
 import {
   THEME_COLOR,
@@ -10,17 +11,18 @@ import {
   SOCIAL_IMAGE,
 } from "src/constants";
 
+import { styles } from "./Layout.styles";
+
 interface Props {
   pageTitle?: string;
   hideGrid?: boolean;
-  class?: string;
+  style?: StyleXStyles | ReadonlyArray<StyleXStyles>;
 }
-const {
-  pageTitle,
-  hideGrid = false,
-  class: classes = "grid-area-desktop",
-} = Astro.props;
+const { pageTitle, hideGrid = false, style } = Astro.props;
 const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
+
+const bodyAttrs = stylex.attrs(styles.body);
+const mainAttrs = stylex.attrs(styles.grid, style);
 ---
 
 <!doctype html>
@@ -31,7 +33,7 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content={THEME_COLOR} />
     <meta name="description" content={SITE_DESCRIPTION.long} />
-    <meta property="og:title" content="On End Studio" />
+    <meta property="og:title" content={SITE_TITLE} />
     <meta property="og:description" content={SITE_DESCRIPTION.short} />
     <meta property="og:image" content={SOCIAL_IMAGE} />
     <meta name="generator" content={Astro.generator} />
@@ -44,19 +46,14 @@ const title = pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
-  <body class="text-primary bg-surface p-4 desktop:p-6">
+  <body {...bodyAttrs}>
     {
       hideGrid ? (
         <main>
           <slot />
         </main>
       ) : (
-        <main
-          class={twMerge(
-            "grid gap-6 grid-cols-5 grid-rows-mobile desktop:grid-cols-14 desktop:grid-rows-desktop",
-            classes
-          )}
-        >
+        <main {...mainAttrs}>
           <slot />
         </main>
       )

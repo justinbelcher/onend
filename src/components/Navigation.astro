@@ -1,53 +1,41 @@
 ---
-import { twMerge } from "tailwind-merge";
 import { Icon } from "astro-icon/components";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
 import { SOCIAL_LINKS, NAV_LINKS } from "src/constants";
 import type { NavLink } from "@types";
 
+import { styles } from "./Navigation.styles";
+
 interface Props {
-  class?: string;
+  style?: StyleXStyles;
 }
 
 const { instagram } = SOCIAL_LINKS;
 
-const { class: classes } = Astro.props;
+const { style } = Astro.props;
+
+const navAttrs = stylex.attrs(styles.nav, style);
+const igAttrs = stylex.attrs(styles.igLink);
 ---
 
-<nav class={twMerge("grid grid-cols-subgrid", classes)}>
+<nav {...navAttrs}>
   {
-    NAV_LINKS.map((link: NavLink) => (
-      <a
-        href={link.href}
-        class="nav-link relative text-xl uppercase no-underline w-fit block"
-        data-active={Astro.url.pathname.startsWith(link.href)}
-        data-nav-link
-      >
-        {link.label}
-      </a>
-    ))
+    NAV_LINKS.map((link: NavLink) => {
+      const isActive = Astro.url.pathname.startsWith(link.href);
+      return (
+        <a
+          href={link.href}
+          {...stylex.attrs(styles.navLink, isActive && styles.navLinkActive)}
+          aria-current={isActive ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      );
+    })
   }
-  <a href={instagram} class="col-start-[-1] flex justify-end" ,
+  <a href={instagram} {...igAttrs}
     ><Icon name="instagram" size="24" title="Instagram" /></a
   >
 </nav>
-
-<style>
-  .nav-link {
-    &::after {
-      position: absolute;
-      display: block;
-      content: "";
-      height: 2px;
-      width: 100%;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: all var(--duration-short) var(--ease-standard);
-      background-color: var(--color-primary);
-    }
-    &[data-active="true"]::after,
-    &:hover::after {
-      transform: scaleX(1);
-    }
-  }
-</style>

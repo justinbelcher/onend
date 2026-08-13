@@ -48,3 +48,6 @@ export const PROJECT_ORDER = [
 ];
 export const MAX_GRID_WIDTH = 640;
 export const MAX_HERO_WIDTH = 1200;
+// Keep in sync with breakpoints.desktop in src/styles/consts.stylex.ts
+// (StyleX const files cannot export values for non-StyleX use).
+export const DESKTOP_MEDIA_QUERY = "(min-width: 768px)";

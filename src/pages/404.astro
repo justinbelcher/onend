@@ -1,34 +1,37 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+
 import Layout from "@layouts/Layout.astro";
 import NotFoundScene from "../components/NotFoundScene";
+
+import { styles } from "@styles/pages/not-found";
+
+const containerAttrs = stylex.attrs(styles.container);
+const sceneAttrs = stylex.attrs(styles.scene);
+const headingAttrs = stylex.attrs(styles.heading);
+const pathnameAttrs = stylex.attrs(styles.pathname);
+const lastLineAttrs = stylex.attrs(styles.lastLine);
 ---
 
 <Layout hideGrid={true} pageTitle="404">
-  <div
-    class="h-[calc(100vh-48px)] flex flex-col desktop:flex-row gap-12 justify-center items-center"
-  >
-    <div class="w-[400px] h-[400px]">
+  <div {...containerAttrs}>
+    <div {...sceneAttrs}>
       <NotFoundScene client:load />
     </div>
     <div>
-      <h1 class="text-4xl mb-4 font-bold">404</h1>
+      <h1 {...headingAttrs}>404</h1>
       <p>
-        Hmm... I couldn't find <code id="pathname" class="bg-yellow-100"
-          >/404</code
+        Hmm... I couldn't find <code id="pathname" {...pathnameAttrs}>/404</code
         >.
       </p>
-      <p class="mb-0">Head back <a href="/">home?</a></p>
+      <p {...lastLineAttrs}>Head back <a href="/">home?</a></p>
     </div>
   </div>
 </Layout>
 
-<script type="module">
-  (() => {
-    document.addEventListener("DOMContentLoaded", () => {
-      const el = document.getElementById("pathname");
-      if (el) {
-        el.textContent = new URL(window.location.href).pathname;
-      }
-    });
-  })();
+<script>
+  const el = document.getElementById("pathname");
+  if (el) {
+    el.textContent = window.location.pathname;
+  }
 </script>

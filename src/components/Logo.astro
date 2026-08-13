@@ -1,16 +1,24 @@
 ---
 import { Image } from "astro:assets";
+import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 import logoVertical from "../assets/logo-vertical.svg";
 import logoHorizontal from "../assets/logo.svg";
 
+import { styles } from "./Logo.styles";
+
 interface Props {
-  class?: string;
+  style?: StyleXStyles;
 }
 
-const { class: classes } = Astro.props;
+const { style } = Astro.props;
+
+const headerAttrs = stylex.attrs(style);
+const desktopAttrs = stylex.attrs(styles.desktopLogo);
+const mobileAttrs = stylex.attrs(styles.mobileLogo);
 ---
 
-<header class={classes}>
+<header {...headerAttrs}>
   <a href="/">
     <Image
       src={logoVertical}
@@ -18,7 +26,8 @@ const { class: classes } = Astro.props;
       height={274}
       loading="eager"
       alt="On end studio logo"
-      class="hidden desktop:block"
+      class={desktopAttrs.class}
+      style={desktopAttrs.style}
     />
     <Image
       src={logoHorizontal}
@@ -26,7 +35,8 @@ const { class: classes } = Astro.props;
       height={56}
       loading="eager"
       alt="On end studio logo"
-      class="desktop:hidden w-full"
+      class={mobileAttrs.class}
+      style={mobileAttrs.style}
     />
   </a>
 </header>
